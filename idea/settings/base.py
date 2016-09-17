@@ -35,10 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.comments',
     'django.contrib.staticfiles',
     'mptt',
-    'core.custom_comments',  # from Collab
     'taggit',
 ]
 

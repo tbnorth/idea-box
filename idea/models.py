@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.conf import settings
-from core.custom_comments.models import MPTTComment
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -170,11 +169,6 @@ class Idea(UserTrackable):
         Lookup the view url for this idea.
         """
         return reverse('idea:idea_detail', args=(self.id,))
-
-    @property
-    def comments(self):
-        return MPTTComment.objects.for_model(self.__class__).filter(
-            is_public=True, is_removed=False, object_pk=self.pk)
 
     @property
     def members(self):

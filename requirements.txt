@@ -1,6 +1,5 @@
-django==1.7
+django==1.8
 django-cache-tools
 django-mptt==0.7.4
 django-taggit<0.18
--e git+https://github.com/cfpb/collab.git#egg=collab
 pillow

@@ -91,11 +91,7 @@ def list(request, sort_or_state=None):
         page = pager.page(pager.num_pages)
 
     #   List of tags
-    tags = Tag.objects.filter(
-        taggit_taggeditem_items__content_type__name='idea',
-        taggit_taggeditem_items__object_id__in=ideas
-    ).annotate(count=Count('taggit_taggeditem_items')
-               ).order_by('-count', 'name')[:25]
+    tags = ()
 
     for tag in tags:
         if tag.slug in tag_strs:
@@ -220,7 +216,7 @@ def detail(request, idea_id):
         for tag in tags:
             tag.tag_url = "%s?tags=%s" % (reverse('idea:idea_list'), tag.slug)
             for ti in tag.taggit_taggeditem_items.filter(tag_creator=request.user,
-                                                         content_type__name="idea",
+                                                         content_type__model="idea",
                                                          object_id=idea_id):
                 tags_created_by_user.append(tag.name)
 

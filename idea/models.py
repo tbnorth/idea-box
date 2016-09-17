@@ -1,5 +1,4 @@
 from datetime import datetime
-from django.contrib.auth.models import SiteProfileNotAvailable
 from django.conf import settings
 from core.custom_comments.models import MPTTComment
 from django.contrib.contenttypes.models import ContentType
@@ -195,7 +194,7 @@ class Idea(UserTrackable):
         else:
             try:
                 return self.creator.get_profile()
-            except (ObjectDoesNotExist, SiteProfileNotAvailable):
+            except (ObjectDoesNotExist):
                 return None
 
     objects = IdeaManager()

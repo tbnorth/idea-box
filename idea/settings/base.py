@@ -30,7 +30,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = [
     'idea',
-    'south',
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -50,13 +49,15 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_string(50))
 
-SOUTH_MIGRATION_MODULES = {
-    'taggit': 'taggit.south_migrations',
-}
-
 COMMENTS_APP = 'core.custom_comments'
 
 try:
     from local_settings import *
 except ImportError:
     pass
+
+MIDDLEWARE_CLASSES = (
+'django.contrib.sessions.middleware.SessionMiddleware',
+'django.contrib.auth.middleware.AuthenticationMiddleware', 
+'django.contrib.messages.middleware.MessageMiddleware'
+)

@@ -189,7 +189,7 @@ class Idea(UserTrackable):
             return None
         else:
             try:
-                return self.creator.get_profile()
+                return self.creator
             except (ObjectDoesNotExist):
                 return None
 

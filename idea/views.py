@@ -195,11 +195,11 @@ def detail(request, idea_id):
 
     voters = idea.voters.all()
 
-    for v in voters:
-        try:
-            v.profile = v.get_profile()
-        except (ObjectDoesNotExist):
-            v.profile = None
+    # for v in voters:
+    #     try:
+    #         v.profile = v.UserProfile
+    #     except (ObjectDoesNotExist):
+    #         v.profile = None
 
     idea_type = ContentType.objects.get(app_label="idea", model="idea")
 
@@ -238,11 +238,11 @@ def show_likes(request, idea_id):
     idea = get_object_or_404(Idea, pk=int(idea_id))
     voters = idea.voters.all()
 
-    for v in voters:
-        try:
-            v.profile = v.get_profile()
-        except (ObjectDoesNotExist, SiteProfileNotAvailable):
-            v.profile = None
+    # for v in voters:
+    #     try:
+    #         v.profile = v.get_profile()
+    #     except (ObjectDoesNotExist):
+    #         v.profile = None
 
     idea_type = ContentType.objects.get(app_label="idea", model="idea")
 

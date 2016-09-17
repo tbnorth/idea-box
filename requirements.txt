@@ -1,5 +1,5 @@
 django==1.8
 django-cache-tools
-django-mptt==0.7.4
+django-mptt
 django-taggit<0.18
 pillow

@@ -1,7 +1,6 @@
 from datetime import date
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import SiteProfileNotAvailable
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -203,7 +202,7 @@ def detail(request, idea_id):
     for v in voters:
         try:
             v.profile = v.get_profile()
-        except (ObjectDoesNotExist, SiteProfileNotAvailable):
+        except (ObjectDoesNotExist):
             v.profile = None
 
     idea_type = ContentType.objects.get(app_label="idea", model="idea")

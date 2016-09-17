@@ -49,13 +49,15 @@ def unique_slug(item, slug_source, slug_field):
                 counter += 1
         setattr(item, slug_field, slug)
 
+def set_to_now():
+    return datetime.utcnow().replace(tzinfo=get_default_timezone())
 
 class UserTrackable(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL)
     #   use a lambda so that this is evaluated upon creation (rather than
     #   once upon class import)
-    time = models.DateTimeField(
-        default=lambda: datetime.utcnow().replace(tzinfo=get_default_timezone()))
+
+    time = models.DateTimeField(default=set_to_now)
 
     class Meta:
         abstract = True

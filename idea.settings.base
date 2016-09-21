@@ -1,0 +1,61 @@
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+INSTALLED_APPS = (
+'django.contrib.sites',
+'django.contrib.contenttypes',
+'django.contrib.auth',
+'django.contrib.admin',
+'ptt',
+'core.custom_comments',
+'core.taggit',
+'idea'
+)
+
+SECRET_KEY = 'abc123'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'data/localhost.sqlite3',
+    },
+    # 'test': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'novumaz',
+    #     'USER': 'novumaz',
+    #     'PASSWORD': 'novumaz',
+    #     'HOST': '',
+    #     'PORT': '',
+    # },
+    # 'production': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'set database name',
+    #     'USER': 'set database user name',
+    #     'PASSWORD': 'set database user password',
+    #     'HOST': '',
+    #     'PORT': '',
+    # },
+}
+
+ROOT_URLCONF = 'idea.urls'
+
+MIDDLEWARE_CLASSES = (
+'django.contrib.sessions.middleware.SessionMiddleware',
+'django.contrib.auth.middleware.AuthenticationMiddleware', 
+'django.contrib.messages.middleware.MessageMiddleware'
+)
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+

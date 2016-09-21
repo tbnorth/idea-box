@@ -3,3 +3,5 @@ django-cache-tools
 django-mptt
 django-taggit<0.18
 pillow
+gunicorn
+dj-database-url

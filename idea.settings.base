@@ -1,16 +1,18 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-INSTALLED_APPS = (
-'django.contrib.sites',
-'django.contrib.contenttypes',
-'django.contrib.auth',
-'django.contrib.admin',
-'ptt',
-'core.custom_comments',
-'core.taggit',
-'idea'
-)
+INSTALLED_APPS = [
+    'idea',
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.staticfiles',
+    'mptt',
+    'taggit',
+    'debug_panel'
+]
 
 SECRET_KEY = 'abc123'
 
@@ -40,9 +42,10 @@ DATABASES = {
 ROOT_URLCONF = 'idea.urls'
 
 MIDDLEWARE_CLASSES = (
-'django.contrib.sessions.middleware.SessionMiddleware',
-'django.contrib.auth.middleware.AuthenticationMiddleware', 
-'django.contrib.messages.middleware.MessageMiddleware'
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_panel.middleware.DebugPanelMiddleware',
 )
 
 import dj_database_url

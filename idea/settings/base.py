@@ -24,10 +24,6 @@ USE_TZ = True
 
 SITE_ID = 1
 
-TEMPLATE_DIRS = (
-    './templates',
-)
-
 INSTALLED_APPS = [
     'idea',
     'django.contrib.auth',
@@ -38,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mptt',
     'taggit',
+    'debug_toolbar',
+    'debug_panel'
 ]
 
 ROOT_URLCONF = 'idea.example_urls'
@@ -55,7 +53,33 @@ except ImportError:
     pass
 
 MIDDLEWARE_CLASSES = (
-'django.contrib.sessions.middleware.SessionMiddleware',
-'django.contrib.auth.middleware.AuthenticationMiddleware', 
-'django.contrib.messages.middleware.MessageMiddleware'
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_panel.middleware.DebugPanelMiddleware',
 )
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            './templates'
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'debug': DEBUG
+        },
+    },
+]

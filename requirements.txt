@@ -1,7 +1,7 @@
-django==1.8
+django==1.10.1
 django-cache-tools
 django-mptt
-django-taggit<0.18
+django-taggit
 pillow
 gunicorn
 dj-database-url

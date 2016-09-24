@@ -16,13 +16,8 @@ from idea.models import Idea, State, Vote, Banner, Config
 from idea.utility import state_helper
 from idea.models import UP_VOTE
 
-if 'core.taggit' in settings.INSTALLED_APPS:
-    from core.taggit.models import Tag, TaggedItem
-    from core.taggit.utils import add_tags
-    COLLAB_TAGS = True
-else:
-    from taggit.models import Tag
-    COLLAB_TAGS = False
+from taggit.models import Tag
+COLLAB_TAGS = False
 
 
 def _render(req, template_name, context={}):
@@ -53,7 +48,7 @@ def get_banner():
         return None
 
 
-@login_required
+#@login_required
 def list(request, sort_or_state=None):
     tag_strs = request.GET.get('tags', '').split(',')
     tag_strs = [t for t in tag_strs if t != u'']
@@ -131,7 +126,7 @@ def list(request, sort_or_state=None):
         'about_text': about_text,
     })
 
-@login_required
+#@login_required
 def banner_list(request):
     current_banners = get_current_banners()
     past_banners = Banner.objects.exclude(is_private=True).filter(end_date__lt=date.today()).order_by('end_date')
@@ -171,7 +166,7 @@ def up_vote(request):
 
 
 
-@login_required
+#@login_required
 def detail(request, idea_id):
     """
     Detail view; idea_id must be a string containing an int.
@@ -386,7 +381,7 @@ def edit_idea(request, idea_id):
                        {'form': form, 'idea': idea })
 
 
-@login_required
+#@login_required
 def room_detail(request, slug):
     """
     Private banner detail view; slug must be the unique slug of the banner.
@@ -394,7 +389,7 @@ def room_detail(request, slug):
     banner = Banner.objects.filter(is_private=True).get(slug=slug)
     return banner_detail(request, banner=banner)
 
-@login_required
+#@login_required
 def challenge_detail(request, banner_id):
     """
     Challenge detail view; banner_id must be a string containing an int.

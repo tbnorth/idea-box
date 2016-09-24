@@ -156,7 +156,7 @@ class Idea(UserTrackable):
         ideas have the same tags for potential collaboration or a little
         healthy competition.""")
     voters = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    through="Vote", null=True,
+                                    through="Vote", 
                                     related_name="idea_vote_creator")
     is_anonymous = models.BooleanField("anonymous Idea", default=False, help_text="""
         Only enable anonymous if the Idea's challenge is private""")

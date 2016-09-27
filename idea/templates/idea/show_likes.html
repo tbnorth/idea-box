@@ -3,7 +3,7 @@
 {% load comments %}
 {% load mptt_tags %}
 
-{% block "content" %}
+{% block content %}
 
         <div id="content" class="idea-single ic" role="main">
             <div class="row">
@@ -85,7 +85,7 @@
 
 {% endblock %}
 
-{% block "js_ready" %}
+{% block js_ready %}
     $(".tags_autocomplete").autocomplete({
         source: "{% url "search:model_tags_json" "idea" %}",
     });

@@ -1,6 +1,6 @@
 {% extends "idea/idea-base.html" %}
 
-{% block "content" %}
+{% block content %}
 
         <div id="content" class="idea-add ic" role="main">
             <div class="row">
@@ -71,7 +71,7 @@
                         <a class="btn" href="{% url "idea:idea_list" %}">Take me to IdeaBox</a>
                     {% endif %}
                     <a class="btn" href="{% url "idea:idea_detail" idea.id %}">Take me to my Idea</a>
-                </span>
+                </div>
             </div><!-- /add-summary -->
         </div><!-- /main -->
 

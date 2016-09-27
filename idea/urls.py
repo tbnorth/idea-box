@@ -2,7 +2,6 @@ from django.conf.urls import url
 import idea.views
 
 urlpatterns = [
-    #'idea.views',
     url(r'^$', idea.views.list),
     url(r'^add/$', idea.views.add_idea, name='add_idea'),
     url(r'^add/(?P<banner_id>\d+)/$', idea.views.add_idea, name='add_idea'),
@@ -19,4 +18,5 @@ urlpatterns = [
     url(r'^room/(?P<slug>.+)/$',
         idea.views.room_detail, name='room_detail'),
     url(r'challenge/list/$', idea.views.banner_list, name='banner_list'),
+
 ]

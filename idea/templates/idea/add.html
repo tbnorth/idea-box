@@ -1,18 +1,18 @@
 {% extends "idea/idea-base.html" %}
 
 
-{%block "css_files" %}
+{%block css_files %}
 <link rel="stylesheet" href="{{ STATIC_URL }}idea/css/selectize.default.css">
 {{ block.super }}
 {% endblock %}
 
 
-{% block "content" %}
+{% block content %}
 
         <div id="content" class="idea-add ic" role="main">
             <div class="row">
                 <div class="logo span7 section project-title">
-                    {% block "breadcrumbs" %}
+                    {% block breadcrumbs %}
                     {% if banner and banner.is_private %}
                         <a href="{% url 'idea:room_detail' banner.slug %}">{{ banner.title }}</a>
                     {% else %}
@@ -24,7 +24,7 @@
             <div class="project-add">
                 <h1>Share your Idea</h1>
                 <a id="activate-help" class="visuallyhidden">Toggle instructions for each field.</a>
-                <form action="{% block "form-url" %}{{ request.path }}{% endblock %}" method="post">
+                <form action="{% block form-url %}{{ request.path }}{% endblock %}" method="post">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="{{ field.html_name }}">
@@ -55,7 +55,7 @@
                         </div>
                     {% endfor %}
                     <span id="submit-buttons">
-                        {% block "submit-buttons" %}
+                        {% block submit-buttons %}
                         <input type="submit" class="btn" id="add-idea-btn" value="Submit this Idea">
                         {% if banner and banner.is_private %}
                             <input type="button" onclick="window.location = '{% url "idea:room_detail" banner.slug %}';" class="btn secondary-action" value="I changed my mind">
@@ -70,7 +70,7 @@
 
 {% endblock %}
 
-{% block "js_ready" %}
+{% block js_ready %}
     if ($('#id_challenge-checkbox').is(":checked")) {
         $('#id_banner').addClass("active");
     };
@@ -160,9 +160,9 @@
 
 {% endblock %}
 
-{% block "js_scripts" %}
+{% block js_scripts %}
     <script src="{{ STATIC_URL }}idea/js/functions.js"></script>
     <script src="{{ STATIC_URL }}idea/js/selectize.min.js"></script>
     <!--[if lt IE 9]><script src="{{ STATIC_URL }}idea/js/es5-shim.min.js"></script><![endif]-->
-{% block "design_js_scripts" %}{% endblock %}
+{% block design_js_scripts %}{% endblock %}
 {% endblock %}

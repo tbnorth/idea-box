@@ -1,12 +1,12 @@
 {% extends "idea/add.html" %}
 
-{% block "form-url" %}{% url 'idea:edit_idea' idea.id %}{% endblock %}
+{% block form-url %}{% url 'idea:edit_idea' idea.id %}{% endblock %}
 
-{% block "submit-buttons" %}
+{% block submit-buttons %}
     <input type="submit" class="btn" id="add-idea-btn" value="Update this Idea">
     <input type="button" onclick="window.location = '{% url "idea:idea_detail" idea.id %}';" class="btn secondary-action" value="I changed my mind">
 {% endblock %}
 
-{% block "breadcrumbs" %}
+{% block breadcrumbs %}
     <a href="{% url 'idea:idea_detail' idea.id %}">my Idea</a>
 {% endblock %}

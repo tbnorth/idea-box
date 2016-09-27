@@ -1,6 +1,6 @@
 {% extends "idea/idea-base.html" %}
 
-{% block "content" %}
+{% block content %}
 
             {% if banner.is_private %}
                 <div id="content" class="idea-home ic" role="main">
@@ -147,7 +147,7 @@
 
 {% endblock %}
 
-{% block "js_scripts" %}
+{% block js_scripts %}
         <script src="{{ STATIC_URL }}idea/js/functions.js"></script>
-{% block "design_js_scripts" %}{% endblock %}
+{% block design_js_scripts %}{% endblock %}
 {% endblock %}

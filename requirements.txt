@@ -10,3 +10,4 @@ whitenoise
 django-debug-toolbar
 django-debug-panel
 django-allauth
+psycopg2

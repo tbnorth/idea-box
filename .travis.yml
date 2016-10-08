@@ -1,9 +1,7 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
 install: 
   - pip install -r requirements.txt
-  - pip install -r requirements_test.txt
 script:
-  - python manage.py test --settings=idea.settings.test
+  - python manage.py test --settings=idea.settings.base

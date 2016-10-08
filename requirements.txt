@@ -7,3 +7,5 @@ gunicorn
 dj-database-url
 django-contrib-comments
 whitenoise
+django-debug-toolbar
+

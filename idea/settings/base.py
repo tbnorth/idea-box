@@ -4,6 +4,7 @@ import logging
 import os
 
 from django.utils.crypto import get_random_string
+import dj_database_url
 
 # auth and allauth settings
 LOGIN_REDIRECT_URL = '/'
@@ -24,6 +25,10 @@ DATABASES = {
     },
 }
 
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'taggit',
     'debug_toolbar',
     'debug_panel',
+    'django_comments',
 
     #allauth...
     'allauth',
@@ -109,8 +115,6 @@ DEBUG = True
 STATIC_URL = '/static/'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_string(50))
-
-COMMENTS_APP = 'core.custom_comments'
 
 try:
     from local_settings import *

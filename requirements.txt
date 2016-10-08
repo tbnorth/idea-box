@@ -5,3 +5,4 @@ django-taggit
 pillow
 gunicorn
 dj-database-url
+django-contrib-comments

@@ -1,6 +1,6 @@
 # IdeaBox
 
-[![Build Status](https://travis-ci.org/cfpb/idea-box.svg?branch=master)](https://travis-ci.org/cfpb/idea-box)
+[![Build Status](https://travis-ci.org/jarz/idea-box.svg?branch=master)](https://travis-ci.org/jarz/idea-box)
 
 IdeaBox is a Django app for collecting and surfacing ideas from users, in the vein of
 IdeaScale, IdeaX, and Django Voice. IdeaBox differs from these projects in its minimal,

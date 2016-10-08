@@ -8,4 +8,4 @@ dj-database-url
 django-contrib-comments
 whitenoise
 django-debug-toolbar
-
+django-debug-panel

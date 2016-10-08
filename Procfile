@@ -1,2 +1,2 @@
-web: gunicorn ideabox.wsgi --log-file -
+web: gunicorn idea.wsgi --log-file -
 

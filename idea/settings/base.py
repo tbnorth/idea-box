@@ -177,3 +177,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+APPEND_SLASH = True

@@ -16,9 +16,9 @@ logging.getLogger('south').setLevel(logging.CRITICAL)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'ideatest',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ideabox',
+        'USER': 'tim',
         'PASSWORD': '',
         'HOST': '',  # Set to empty string for localhost
         'PORT': '',  # Set to empty string for default
@@ -133,6 +133,7 @@ except ImportError:
     pass
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -177,5 +178,3 @@ AUTHENTICATION_BACKENDS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-APPEND_SLASH = True

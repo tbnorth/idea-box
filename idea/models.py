@@ -6,11 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.timezone import get_default_timezone
 from django.utils.translation import ugettext_lazy
-
-if 'core.taggit' in settings.INSTALLED_APPS:
-    from core.taggit.managers import TaggableManager
-else:
-    from taggit.managers import TaggableManager
+from taggit.managers import TaggableManager
 
 
 def unique_slug(item, slug_source, slug_field):
@@ -117,7 +113,7 @@ class IdeaManager(models.Manager):
             'comment_count': """
                 SELECT count(*) FROM django_comments
                 WHERE django_comments.content_type_id = %s
-                AND django_comments.object_pk = idea_idea.id
+                AND django_comments.object_pk = CAST(idea_idea.id AS TEXT)
             """,
             'recent_activity': """
                 SELECT MAX(CASE WHEN COALESCE(c.time, date('2001-01-01')) >= COALESCE(b.submit_date, date('2001-01-01')) AND COALESCE(c.time, date('2001-01-01')) >= a.time THEN c.time
@@ -125,7 +121,7 @@ class IdeaManager(models.Manager):
                                 ELSE a.time
                            END)
                 FROM idea_idea a
-                LEFT OUTER JOIN django_comments b ON a.id = b.object_pk
+                LEFT OUTER JOIN django_comments b ON CAST(a.id AS TEXT) = b.object_pk
                 LEFT OUTER JOIN idea_vote c ON a.id = c.idea_id
                 WHERE a.id = idea_idea.id
             """,

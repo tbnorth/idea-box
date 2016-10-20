@@ -69,18 +69,18 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.edmodo',
     # 'allauth.socialaccount.providers.eveonline',
     # 'allauth.socialaccount.providers.evernote',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.feedly',
     # 'allauth.socialaccount.providers.flickr',
     # 'allauth.socialaccount.providers.foursquare',
     # 'allauth.socialaccount.providers.fxa',
-    # 'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.gitlab',
-    # 'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.hubic',
     # 'allauth.socialaccount.providers.instagram',
     # 'allauth.socialaccount.providers.linkedin',
-    # 'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.linkedin_oauth2',
     # 'allauth.socialaccount.providers.mailru',
     # 'allauth.socialaccount.providers.odnoklassniki',
     # 'allauth.socialaccount.providers.openid',
@@ -91,7 +91,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.reddit',
     # 'allauth.socialaccount.providers.robinhood',
     # 'allauth.socialaccount.providers.shopify',
-    # 'allauth.socialaccount.providers.slack',
+    'allauth.socialaccount.providers.slack',
     # 'allauth.socialaccount.providers.soundcloud',
     # 'allauth.socialaccount.providers.spotify',
     # 'allauth.socialaccount.providers.stackexchange',
@@ -99,7 +99,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.tumblr',
     # 'allauth.socialaccount.providers.twentythreeandme',
     # 'allauth.socialaccount.providers.twitch',
-    # 'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.twitter',
     # 'allauth.socialaccount.providers.untappd',
     # 'allauth.socialaccount.providers.vimeo',
     # 'allauth.socialaccount.providers.vk',
@@ -178,3 +178,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+INSTALLED_APPS += (
+    'threadedcomments',
+)
+
+COMMENTS_APP = 'threadedcomments'

@@ -184,3 +184,5 @@ INSTALLED_APPS += (
 )
 
 COMMENTS_APP = 'threadedcomments'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'

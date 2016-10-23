@@ -161,8 +161,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
-                #'allauth.account.context_processors.account',
-                #'allauth.socialaccount.context_processors.socialaccount',
+                'allauth.account.context_processors.account',
+                'allauth.socialaccount.context_processors.socialaccount',
             ],
             'debug': DEBUG
         },

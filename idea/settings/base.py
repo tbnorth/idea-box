@@ -125,7 +125,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_string(50))
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 try:
     from local_settings import *

@@ -125,7 +125,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_string(50))
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 try:
     from local_settings import *
@@ -161,8 +161,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
-                #'allauth.account.context_processors.account',
-                #'allauth.socialaccount.context_processors.socialaccount',
             ],
             'debug': DEBUG
         },
@@ -185,4 +183,4 @@ INSTALLED_APPS += (
 
 COMMENTS_APP = 'threadedcomments'
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

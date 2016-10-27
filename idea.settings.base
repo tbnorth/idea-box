@@ -75,7 +75,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.xing',
 ]
 
-SECRET_KEY = 'abc123'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DATABASES = {
     'default': {

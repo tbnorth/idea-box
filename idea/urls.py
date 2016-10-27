@@ -17,5 +17,7 @@ urlpatterns = [
         idea.views.challenge_detail, name='challenge_detail'),
     url(r'^room/(?P<slug>.+)/$',
         idea.views.room_detail, name='room_detail'),
+    url(r'^room/$',
+        idea.views.room_detail, name='room_detail'),
     url(r'challenge/list/$', idea.views.banner_list, name='banner_list'),
 ]

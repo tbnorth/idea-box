@@ -86,7 +86,10 @@ class Banner(models.Model):
             return u'%s' % self.title
 
     def room_url(self):
-        return reverse('idea:room_detail', args=(self.slug,))
+        if not self.slug:
+            return reverse('idea:room_detail')
+        else:
+            return reverse('idea:room_detail', args=(self.slug,))
 
     def room_link(self):
         return "<a href='%s'>%s</a>" % (self.room_url(), self.title)

@@ -2,6 +2,8 @@
 
 {% block css_files %}
     <link rel="stylesheet" href="{{ STATIC_URL }}idea/css/idea.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}idea/css/sample_style.css">
+    <script src="https://use.fontawesome.com/1c8baa6ee2.js"></script>
 
     {% if page.description %}
         <meta name="description" content="{{ page.description|striptags }}"> 
@@ -12,5 +14,5 @@
 {% block content %}{% endblock %}
 
 {% block js_scripts %}
-        <script src="{{ STATIC_URL }}idea/js/functions.js"></script>
+    <script src="{{ STATIC_URL }}idea/js/functions.js"></script>
 {% endblock %}

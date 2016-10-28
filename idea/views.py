@@ -429,7 +429,6 @@ def banner_detail(request, banner):
 
     #   List of tags that are associated with an idea in the banner list
     tags = Tag.objects.filter(
-        taggit_taggeditem_items__content_type__name='idea',
         taggit_taggeditem_items__object_id__in=ideas
     ).annotate(count=Count('taggit_taggeditem_items')
                ).order_by('-count', 'name')[:25]

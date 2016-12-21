@@ -1,4 +1,5 @@
 {% extends "idea/idea-base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -139,6 +140,6 @@
 {% endblock %}
 
 {% block js_scripts %}
-        <script src="{{ STATIC_URL }}idea/js/functions.js"></script>
+        <script src="{% static "idea/js/functions.js" %}"></script>
 {% block design_js_scripts %}{% endblock %}
 {% endblock %}

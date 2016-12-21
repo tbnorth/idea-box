@@ -1,7 +1,9 @@
+{% load static %}
 <html>
 
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
+    <!-- check -->
+    <link rel="stylesheet" href="{% static "idea/base.css" %}">
     {%block css_files %}{% endblock %}
 </head>
 

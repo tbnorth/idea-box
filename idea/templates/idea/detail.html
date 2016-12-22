@@ -2,6 +2,14 @@
 
 {% load comments %}
 {% load mptt_tags %}
+{% load threadedcomments_tags %}
+{% load static %}
+
+{% block js_scripts %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "fluent_comments/css/ajaxcomments.css" %}"/>
+<script type="text/javascript" src="{% static "fluent_comments/js/ajaxcomments.js" %}"></script>
+{% endblock %}
 
 {% block content %}
 
@@ -87,56 +95,8 @@
                                 <h4>{{comment_list|length}} Comments</h4>
                             </div><!-- /comment-total -->
                             <div class="comments-wrap">
-                                <div class="comment-form">
-                                    {% get_comment_form for idea as comment_form %}
-                                    <form action="{% comment_form_target %}" method="POST">
-                                        <label class="comment-label" for="id_comment">Enter your Comments</label>
-                                    {% csrf_token %}
-                                    {{comment_form.comment}}
-                                    {{comment_form.content_type}}
-                                    {{comment_form.object_pk}}
-                                    {{comment_form.timestamp}}
-                                    {{comment_form.security_hash}}
-                                        <input type="hidden" name="parent" id="parent_id" value="" />
-                                        <input type="hidden" name = "next" value="{% url 'idea:idea_detail' idea.id %}" />
-                                        {% if idea.banner and idea.banner.is_private %}
-                                          {{comment_form.is_anonymous}}
-                                          <label class="anonymous-label" for="id_is_anonymous">Hide my name from this comment</label>
-                                        {% endif %}
-                                        <input type="submit" class="btn right" value="Submit" id="id_submit" />
-                                    </form>
-                                </div><!-- /comment-form -->
-                                <ol class="comment-list">
-                                    {% recursetree comment_list %}
-                                    <li class="comment">
-                                        <article>
-                                            <footer class="comment-meta">
-                                            {% if node.is_anonymous %}
-                                                <p class="comment-author"><span class="comment-date">An IdeaBox User on {{node.submit_date|date:"M d, Y g:i A"}}</span>
-                                                {% comment %} use parent_id if present, forces max comment depth of 2 {% endcomment %}
-                                                | <a href="#c{{ node.id }}" data-comment-id="{% if node.parent_id %}{{ node.parent_id }}{% else %}{{ node.id }}{% endif %}" class="comment_reply_link">Reply</a></p>
-                                            {% elif node.user.get_profile %}
-                                                <p class="comment-author"><a href="{{node.user.get_profile.get_absolute_url}}">{{node.user_name}}</a><span class="comment-date"> on {{node.submit_date|date:"M d, Y g:i A"}}</span>
-                                                {% comment %} use parent_id if present, forces max comment depth of 2 {% endcomment %}
-                                                | <a href="#c{{ node.id }}" data-comment-id="{% if node.parent_id %}{{ node.parent_id }}{% else %}{{ node.id }}{% endif %}" class="comment_reply_link">Reply</a></p>
-                                            {% else %}
-                                                <p class="comment-author">{{node.user_name}}<span class="comment-date"> on {{node.submit_date|date:"M d, Y g:i A"}}</span>
-                                                {% comment %} use parent_id if present, forces max comment depth of 2 {% endcomment %}
-                                                | <a href="#c{{ node.id }}" data-comment-id="{% if node.parent_id %}{{ node.parent_id }}{% else %}{{ node.id }}{% endif %}" class="comment_reply_link">Reply</a></p>
-                                            {% endif %}
-                                            </footer><!-- /comment-meta -->
-                                            <div class="comment-content">
-                                                <p>{{node.comment|urlize|linebreaksbr}}</p>
-                                            </div><!-- /comment-content -->
-                                            {% if not node.is_leaf_node %}
-                                                <ol class="comment-list">
-                                                    {{ children }}
-                                                </ol>
-                                            {% endif %}
-                                        </article>
-                                    </li>
-                                    {% endrecursetree %}
-                                </ol><!-- /comments-list -->
+                                {% render_comment_list for idea %}
+                                {% render_comment_form for idea %}
                             </div><!-- /comments-wrap -->
                         </div><!-- /comments -->
                         </div><!-- /idea-entry-content -->

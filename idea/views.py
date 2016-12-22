@@ -86,7 +86,8 @@ def list(request, sort_or_state=None):
         page = pager.page(pager.num_pages)
 
     #   List of tags
-    tags = ()
+    tags = Tag.objects.annotate(count=Count('taggit_taggeditem_items')
+               ).order_by('-count', 'name')[:25]
 
     for tag in tags:
         if tag.slug in tag_strs:

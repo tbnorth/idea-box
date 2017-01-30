@@ -1,3 +1,4 @@
+import json
 from datetime import date
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -10,6 +11,9 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpRespons
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 from django.db.models import Q
+from django.utils.safestring import mark_safe
+
+from django_comments.signals import comment_was_posted
 
 from idea.forms import IdeaForm, PrivateIdeaForm, IdeaTagForm, UpVoteForm
 from idea.models import Idea, State, Vote, Banner, Config
@@ -19,7 +23,16 @@ from idea.models import UP_VOTE
 from taggit.models import Tag
 COLLAB_TAGS = False
 
+def get_comment_info(sender, **kwargs):
+    comment, request = kwargs['comment'], kwargs['request']
+    print(dir(comment))
+    request.session['comment_info'] = {
+        'user_name': comment.user_name,
+        'email': comment.email,
+    }
+    print(request.session['comment_info'])
 
+comment_was_posted.connect(get_comment_info)
 def _render(req, template_name, context={}):
     context['active_app'] = 'Idea'
     context['is_idea'] = True
@@ -216,15 +229,25 @@ def detail(request, idea_id):
                                                          object_id=idea_id):
                 tags_created_by_user.append(tag.name)
 
+    idea_vars = {}
+    if request.user.is_authenticated():
+        idea_vars['id_name'] = request.user.username
+        idea_vars['id_email'] = request.user.email
+    else:
+        info = request.session.get('comment_info', {})
+        idea_vars['id_name'] = info.get('user_name', '')
+        idea_vars['id_email'] = info.get('email', '')
+    idea_vars = mark_safe("<script>idea_vars = %s;</script>" % json.dumps(idea_vars))
+
     return _render(request, 'idea/detail.html', {
         'idea': idea,  # title, body, user name, user photo, time
         'support': request.user in voters,
         'tags': tags,
         'tags_created_by_user': tags_created_by_user,
         'voters': voters,
-        'tag_form': tag_form
+        'tag_form': tag_form,
+        'idea_vars': idea_vars,
     })
-
 
 @login_required
 def show_likes(request, idea_id):

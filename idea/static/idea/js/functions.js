@@ -40,4 +40,10 @@ $(document).ready(function() {
         $('#cancel_reply').click(cancel_reply_form);
     });
 
+    //Pre-fill comment form fields
+    if (typeof idea_vars != 'undefined' && idea_vars.id_name) {
+        $("#id_name").val(idea_vars.id_name);
+        $("#id_email").val(idea_vars.id_email);
+    }
+
 });

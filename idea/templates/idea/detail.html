@@ -77,9 +77,9 @@
                             {% if not idea.is_anonymous %}
                               by
                               {% if idea.get_creator_profile %}
-                                <span class="author"><a href="{{idea.get_creator_profile.get_absolute_url}}">{{idea.creator.first_name}} {{idea.creator.last_name}}</a></span>
+                                <span class="author"><a href="{{idea.get_creator_profile.get_absolute_url}}">{{idea.creator.username}}</a></span>
                               {% else %}
-                                <span class="author">{{idea.creator.first_name}} {{idea.creator.last_name}} </span>
+                                <span class="author">{{idea.creator.username}}</span>
                               {% endif %}
                             {% endif %}
                             on {{idea.time|date:"M d, Y "}}

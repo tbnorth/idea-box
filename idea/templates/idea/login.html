@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Login</title>
+<style>
+  * { font-family: sans-serif; }
+</style>
+</head>
+<body>
+
+<form action="/idea/login/" method="POST">{% csrf_token %}
+<p>
+<div>User name: <input name='username'/></div>
+<div>Whatever you want, "Your Name" is a good choice.</div>
+</p><p>
+<div>E-mail: <input name='email'/></div>
+<div>Not required, but helpful.</div>
+</p>
+<div><input type='submit' value='login'/></div>
+<input type='hidden' name='next' value='{{next}}'/>
+</form>
+
+</body>
+</html>

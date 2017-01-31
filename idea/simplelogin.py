@@ -20,7 +20,10 @@ class SimpleLogin(object):
         return User.objects.get(id=user_id)
 
     def user_by_username(self, username=None, email=None):
-        return User.objects.get_or_create(
+        user = User.objects.get_or_create(
             defaults = {'email': email or ""},
             username=username,
         )[0]
+        if user.is_staff or user.is_superuser:
+            return None
+        return user

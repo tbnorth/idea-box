@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 from django.db.models import Q
 from django.utils.safestring import mark_safe
+from django.contrib.auth import authenticate, login, logout
 
 from django_comments.signals import comment_was_posted
 
@@ -40,6 +41,38 @@ def _render(req, template_name, context={}):
     return render(req, template_name, context)
 
 
+def simple_login(request):
+    """simple_login - simple password free login mode
+
+    :param HTTPRequest request: http request
+    """
+    if request.method == 'POST':
+        user = authenticate(
+            username=request.POST['username'],
+            password='none',
+            email=request.POST['email'],
+        )
+
+        if user is None:
+            # typically only happens for admin/staff users
+            # going here will trigger regular Django login
+            return HttpResponseRedirect('/admin/login/?next='+request.POST['next'])
+
+        login(request, user)
+        return HttpResponseRedirect(request.POST['next'])
+
+    else:
+
+        return _render(request, 'idea/login.html', {
+            'next': request.GET['next'],
+        })
+def simple_logout(request):
+    """logout - log out
+
+    :param HTTPRequest request: http request
+    """
+    logout(request)
+    return HttpResponseRedirect('/idea/')
 def get_current_banners(additional_ids_list=None):
     start_date = Q(start_date__lte=date.today())
     end_date = Q(end_date__gte=date.today())|Q(end_date__isnull=True)

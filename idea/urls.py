@@ -3,6 +3,7 @@ import idea.views
 
 urlpatterns = [
     url(r'^$', idea.views.list),
+    url(r'^login/$', idea.views.simple_login),
     url(r'^add/$', idea.views.add_idea, name='add_idea'),
     url(r'^add/(?P<banner_id>\d+)/$', idea.views.add_idea, name='add_idea'),
     url(r'^edit/(?P<idea_id>\d+)/$', idea.views.edit_idea, name='edit_idea'),

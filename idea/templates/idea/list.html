@@ -7,6 +7,12 @@
             <div class="left span9">
                 <section id="idea-hero" class="idea-hero">
                     <header class="project-header">
+                        {% if username %}
+                        <div style="float:right">
+                            {{username}} - <a href="/accounts/logout/">log out</a>
+                        </div>
+                        {% endif %}
+
                         <div class="row">
                             <div class="logo span5">
                                 <h2 class="section">
@@ -131,7 +137,7 @@
                                 <span class="tag_remove">{{tag.count}}</span>
                             </li>
                             {% endfor %}
-                        </ul>   
+                        </ul>
                     </aside>
                 </div><!-- /span_side -->
             </div><!-- /row -->

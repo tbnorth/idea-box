@@ -138,6 +138,7 @@ def list(request, sort_or_state=None):
         'banner': banner,
         'browse_banners': browse_banners,
         'about_text': about_text,
+        'username': request.user.username if request.user.is_authenticated() else None,
     })
 
 #@login_required

@@ -190,28 +190,38 @@ def vote_up(idea, user):
     vote.save()
 
 
-@require_POST
-@login_required
+# @require_POST
+# @login_required
 def up_vote(request):
-    form = UpVoteForm(request.POST)
 
-    if form.is_valid():
-        idea_id = form.cleaned_data['idea_id']
-        next_url = form.cleaned_data['next']
+    if not request.user.is_authenticated:
+        # need login first, save vote for later
+        request.session['vote_for'] = request.POST['idea_id']
+        return HttpResponseRedirect("/accounts/login/?next=/idea/vote/up/")
 
-        idea = Idea.objects.get(pk=idea_id)
+    vote_for = request.session.pop('vote_for', None)
+    if vote_for:
+        # delayed vote while login happend, post data lost
+        idea = Idea.objects.get(pk=vote_for)
+        next_url = "/idea/list/trending/"
+    else:
+        # already logged in
+        form = UpVoteForm(request.POST)
+        if form.is_valid():
+            idea_id = form.cleaned_data['idea_id']
+            next_url = form.cleaned_data['next']
+            idea = Idea.objects.get(pk=idea_id)
 
-        # Up voting is idempotent
-        existing_votes = Vote.objects.filter(
-            idea=idea, creator=request.user, vote=UP_VOTE)
+    # Up voting is idempotent
+    existing_votes = Vote.objects.filter(
+        idea=idea, creator=request.user, vote=UP_VOTE)
 
-        if not existing_votes.exists():
-            vote_up(idea, request.user)
-        elif existing_votes.exists():
-            existing_votes.delete()
+    if not existing_votes.exists():
+        vote_up(idea, request.user)
+    elif existing_votes.exists():
+        existing_votes.delete()
 
-        return HttpResponseRedirect(next_url)
-
+    return HttpResponseRedirect(next_url)
 
 
 #@login_required

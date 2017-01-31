@@ -4,6 +4,9 @@
 {% block css_files %}
     <link rel="stylesheet" href="{% static "idea/css/idea.css" %}">
     <link rel="stylesheet" href="{% static "idea/css/sample_style.css" %}">
+    {% if local_css %}
+        <link rel="stylesheet" href="{% static local_css %}">
+    {% endif %}
     <script src="https://use.fontawesome.com/1c8baa6ee2.js"></script>
 
     {% if page.description %}
@@ -13,9 +16,13 @@
 {% endblock %}
 
 {% block content %}
-{%if messages %}{% for message in messages %}
-<div class="message">{{message}}</div>
-{% endfor %}{% endif %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}
 
 {% block js_scripts %}

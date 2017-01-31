@@ -931,11 +931,12 @@ section.main-content hr {
 
 .pagination ul > .disabled > span,
 
-.message {
-    border: solid 3px #f4bf42;
-    background: #fcbeba;
+.messages .info {
+    border: solid 3px #bff442;
+    background: #befcba;
     font-weight: bold;
     font-size: 150%;
-    padding: 1em;
+    padding: 0.5em;
     text-align: center;
+    font-family: sans-serif;
 }

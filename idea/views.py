@@ -13,7 +13,7 @@ from django.views.decorators.http import require_POST
 from django.db.models import Q
 from django.utils.safestring import mark_safe
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib import messages
 from django_comments.signals import comment_was_posted
 
 from idea.forms import IdeaForm, PrivateIdeaForm, IdeaTagForm, UpVoteForm
@@ -172,7 +172,7 @@ def list(request, sort_or_state=None):
         'browse_banners': browse_banners,
         'about_text': about_text,
         'username': request.user.username if request.user.is_authenticated() else None,
-        'messages': request.session.pop("messages", []),
+        'messages': messages.get_messages(request),
     })
 
 #@login_required
@@ -221,9 +221,8 @@ def up_vote(request):
         vote_up(idea, request.user)
     elif existing_votes.exists():
         if vote_for is not None:
-            messages = request.session.get("messages", [])
-            messages.append("You already liked that")
-            request.session['messages'] = messages
+            messages.add_message(request, messages.INFO, 
+                "You already liked that")
         else:
             existing_votes.delete()
 

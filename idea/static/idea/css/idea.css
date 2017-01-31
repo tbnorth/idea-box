@@ -930,3 +930,12 @@ section.main-content hr {
 }
 
 .pagination ul > .disabled > span,
+
+.message {
+    border: solid 3px #f4bf42;
+    background: #fcbeba;
+    font-weight: bold;
+    font-size: 150%;
+    padding: 1em;
+    text-align: center;
+}

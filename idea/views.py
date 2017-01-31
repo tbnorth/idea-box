@@ -172,6 +172,7 @@ def list(request, sort_or_state=None):
         'browse_banners': browse_banners,
         'about_text': about_text,
         'username': request.user.username if request.user.is_authenticated() else None,
+        'messages': request.session.pop("messages", []),
     })
 
 #@login_required
@@ -219,7 +220,12 @@ def up_vote(request):
     if not existing_votes.exists():
         vote_up(idea, request.user)
     elif existing_votes.exists():
-        existing_votes.delete()
+        if vote_for is not None:
+            messages = request.session.get("messages", [])
+            messages.append("You already liked that")
+            request.session['messages'] = messages
+        else:
+            existing_votes.delete()
 
     return HttpResponseRedirect(next_url)
 

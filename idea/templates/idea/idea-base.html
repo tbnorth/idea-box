@@ -12,7 +12,11 @@
 
 {% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}
+{%if messages %}{% for message in messages %}
+<div class="message">{{message}}</div>
+{% endfor %}{% endif %}
+{% endblock %}
 
 {% block js_scripts %}
 {{idea_vars}}

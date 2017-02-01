@@ -2,20 +2,19 @@
 {% load static %}
 
 {% block content %}{{ block.super }}
+        {% if username %}
+        <div style="float:right" class='username'>
+            {{username}} - <a href="/accounts/logout/">log out</a>
+        </div>
+        {% endif %}
         <div id="content" class="idea-home ic" role="main">
             <div class="left span9">
                 <section id="idea-hero" class="idea-hero">
                     <header class="project-header">
-                        {% if username %}
-                        <div style="float:right">
-                            {{username}} - <a href="/accounts/logout/">log out</a>
-                        </div>
-                        {% endif %}
-
                         <div class="row">
-                            <div class="logo span5">
+                            <div class="logo ">
                                 <h2 class="section">
-                                    <a href="{% url 'idea:idea_list' %}">IdeaBox</a>
+                                    <a href="{% url 'idea:idea_list' %}">SLRE Ideas</a>
                                 </h2>
                             </div>
                             <p class="info">{{ about_text|safe }}</p>

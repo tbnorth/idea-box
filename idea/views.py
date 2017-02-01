@@ -15,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_comments.signals import comment_was_posted
+from django.template.response import TemplateResponse
 
 from idea.forms import IdeaForm, PrivateIdeaForm, IdeaTagForm, UpVoteForm
 from idea.models import Idea, State, Vote, Banner, Config
@@ -38,7 +39,8 @@ def _render(req, template_name, context={}):
     context['active_app'] = 'Idea'
     context['is_idea'] = True
     context['app_link'] = reverse('idea:idea_list')
-    return render(req, template_name, context)
+    # return render(req, template_name, context)
+    return TemplateResponse(req, template_name, context)
 
 
 def simple_login(request):

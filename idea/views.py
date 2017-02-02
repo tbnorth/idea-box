@@ -35,12 +35,16 @@ def get_comment_info(sender, **kwargs):
     print(request.session['comment_info'])
 
 comment_was_posted.connect(get_comment_info)
-def _render(req, template_name, context={}):
+def _render(request, template_name, context={}):
     context['active_app'] = 'Idea'
     context['is_idea'] = True
     context['app_link'] = reverse('idea:idea_list')
-    # return render(req, template_name, context)
-    return TemplateResponse(req, template_name, context)
+    context['username'] = (request.user.username
+                           if request.user.is_authenticated() else None)
+    context['messages'] = messages.get_messages(request)
+
+    # return render(request, template_name, context)
+    return TemplateResponse(request, template_name, context)
 
 
 def simple_login(request):
@@ -173,8 +177,6 @@ def list(request, sort_or_state=None):
         'banner': banner,
         'browse_banners': browse_banners,
         'about_text': about_text,
-        'username': request.user.username if request.user.is_authenticated() else None,
-        'messages': messages.get_messages(request),
     })
 
 #@login_required

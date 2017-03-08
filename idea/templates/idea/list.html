@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="logo ">
                                 <h2 class="section">
-                                    <a href="{% url 'idea:idea_list' %}">SLRE Ideas</a>
+                                    <a href="{% url 'idea:idea_list' %}">SLRE Idea Slam</a>
                                 </h2>
                             </div>
                             <p class="info">{{ about_text|safe }}</p>
@@ -122,7 +122,7 @@
 			</ul>
 		    </aside>
                     <aside class="tags">
-                        <h3>Browse by Tag:</h3>
+                        <h3>Filter by Tag:</h3>
                         <ul>
                             {% for tag in tags %}
                             <li class="tag">

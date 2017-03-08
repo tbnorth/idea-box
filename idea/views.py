@@ -162,6 +162,8 @@ def list(request, sort_or_state=None):
     if current_banners:
         banner = current_banners[0]
         browse_banners = current_banners[1:5]
+        # TNB not using current banner concept
+        browse_banners = current_banners
     try:
         about_text = Config.objects.get(
             key="list_about").value.replace('<script>','')\

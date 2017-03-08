@@ -34,7 +34,7 @@
                         {{banner.text|urlize|linebreaksbr}}
                     </p>
                     {% if is_current_banner %}
-                        <div id="challenge-link"><a href="{% url 'idea:add_idea' banner.id %}" class="chevron-right">Submit an Idea for this Challenge</a></div>
+                        <div id="challenge-link"><a href="{% url 'idea:add_idea' banner.id %}" class="btn-huge">Submit an Idea for this Challenge</a></div>
                     {% elif banner.is_private %}
                         <div id="challenge-link"><a href="{% url 'idea:add_idea' banner.id %}" class="chevron-right">Submit an Idea for this private room</a></div>
                     {% endif %}
@@ -132,7 +132,7 @@
                     </div><!-- /project-add-idea -->
                     {% endif %}
                     <aside class="tags">
-                        <h3>Browse by Tag:</h3>
+                        <h3>Filter by Tag:</h3>
                         <ul>
                             {% for tag in tags %}
                             <li class="tag">

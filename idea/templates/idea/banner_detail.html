@@ -30,7 +30,7 @@
                         {% endif %}
                         <h2>{{banner.title}}</h2>
                     </div>
-                    <p class="challenge-entry-content">
+                    <p class="challenge-entry-content visible">
                         {{banner.text|urlize|linebreaksbr}}
                     </p>
                     {% if is_current_banner %}
@@ -39,7 +39,7 @@
                         <div id="challenge-link"><a href="{% url 'idea:add_idea' banner.id %}" class="chevron-right">Submit an Idea for this private room</a></div>
                     {% endif %}
                     {% if not banner.is_private %}
-                        <div id="date-range">
+                        <div id="date-range" class="visible">
                             <span id="start">Challenge start date: {{banner.start_date|date:"SHORT_DATE_FORMAT"}}</span>
                             <span id="end">Challenge end date: {{banner.end_date|date:"SHORT_DATE_FORMAT"}}</span>
                         </div>
